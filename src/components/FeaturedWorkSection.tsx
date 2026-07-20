@@ -142,8 +142,8 @@ const typeBadge: Record<string, { label: string; className: string }> = {
 export default function FeaturedWorkSection() {
   const [showAll, setShowAll] = useState(false);
 
-  // Array is already ordered by prestige — no sorting needed
-  const visible = showAll ? featuredItems : featuredItems.slice(0, 8);
+  // Array is already ordered by prestige - no sorting needed
+  const visible = showAll ? featuredItems : featuredItems.slice(0, 5);
 
   return (
     <section id="featured" className="px-4 py-20 max-w-2xl mx-auto">
@@ -161,7 +161,7 @@ export default function FeaturedWorkSection() {
 
         <div className="space-y-1">
           <div className="text-xs text-muted-foreground mb-3 px-2">
-            top {featuredItems.length} recognitions
+            top {showAll ? featuredItems.length : 5} recognitions
           </div>
 
           {visible.map((item, i) => {
@@ -210,12 +210,12 @@ export default function FeaturedWorkSection() {
         )}
 
         <a
-          href="https://github.com/anonyks/KS-Archive"
+          href="https://anonyks.github.io/KS-Archive/"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block mt-4 ml-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
-          → view full archive on GitHub
+          → view full archive
         </a>
       </motion.div>
     </section>
