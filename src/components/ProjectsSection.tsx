@@ -14,6 +14,7 @@ interface Repo {
 export default function ProjectsSection() {
   const [repos, setRepos] = useState<Repo[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showAll, setShowAll] = useState(false);
 
   // Repos to exclude from display (trivial, basic, or practice repos)
   const EXCLUDED_REPOS = new Set([
@@ -60,7 +61,7 @@ export default function ProjectsSection() {
           <div className="text-muted-foreground text-sm">No repositories found.</div>
         ) : (
           <div className="space-y-1">
-            {repos.map((repo, i) => (
+            {(showAll ? repos : repos.slice(0, 5)).map((repo, i) => (
               <motion.a
                 key={repo.id}
                 href={repo.html_url}
@@ -89,6 +90,15 @@ export default function ProjectsSection() {
               </motion.a>
             ))}
           </div>
+        )}
+
+        {repos.length > 5 && (
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="mt-4 ml-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {showAll ? '→ show less' : `→ show all ${repos.length} projects`}
+          </button>
         )}
       </motion.div>
     </section>
